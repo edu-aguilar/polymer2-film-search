@@ -1,4 +1,5 @@
 
+<link rel="import" href="search-box.html">
 
 <dom-module id="film-search">
 
@@ -8,7 +9,9 @@
         display: block;
       }
     </style>
+
     <p>Buscador de películas</p>
+    <search-box placeholder="Buscar película..."></search-box>
   </template>
 
   <script>
@@ -18,6 +21,15 @@
         return {
           films: Array
         }
+      }
+
+      ready() {
+        super.ready();
+        this.addEventListener('searchFilm', this._searchFilm);
+      }
+
+      _searchFilm(event) {
+        console.log('data from event: ' + event.detail.value);
       }
     }
     customElements.define(FilmSearch.is, FilmSearch);
