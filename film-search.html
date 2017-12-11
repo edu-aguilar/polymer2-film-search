@@ -1,0 +1,26 @@
+
+
+<dom-module id="film-search">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <p>Buscador de películas</p>
+  </template>
+
+  <script>
+    class FilmSearch extends Polymer.Element {
+      static get is() { return "film-search"; }
+      static get properties() {
+        return {
+          films: Array
+        }
+      }
+    }
+    customElements.define(FilmSearch.is, FilmSearch);
+  </script>
+
+</dom-module>
