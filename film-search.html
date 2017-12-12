@@ -1,4 +1,5 @@
 <link rel="import" href="search-box.html">
+<link rel="import" href="film-list.html">
 
 <dom-module id="film-search">
 
@@ -11,10 +12,9 @@
 
     <p>Buscador de películas</p>
     <search-box placeholder="Buscar película..."></search-box>
-    <p>longitud array pelis: [[films.length]]</p>
-    
+
     <template is="dom-if" if="{{_areThereFilms(films)}}">
-      mostrar listado de peliculas!
+      <film-list films="{{films}}"></film-list>
     </template>
 
   </template>
