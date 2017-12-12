@@ -12,14 +12,23 @@
 
     <p>Buscador de películas</p>
     <search-box placeholder="Buscar película..."></search-box>
+    <p>longitud array pelis: [[films.length]]</p>
   </template>
 
   <script>
     class FilmSearch extends Polymer.Element {
+
       static get is() { return "film-search"; }
       static get properties() {
         return {
-          films: Array
+          films: {
+            type: Array,
+            value: function () { return []; }
+          },
+          dummy: {
+            type: String,
+            value: 'porpakens'
+          }
         }
       }
 
@@ -29,7 +38,16 @@
       }
 
       _searchFilm(event) {
-        console.log('data from event: ' + event.detail.value);
+        console.log('please find this film!: ' + event.detail.value);
+        this._findFilms(event.detail.value);
+      }
+
+      _findFilms(film) {
+        const url = `http://www.omdbapi.com/?s=${film}&plot=full&apikey=e477ed6a`
+        fetch(url)
+          .then((resp) => resp.json())
+          .then((data) => { this.set('films', data.Search) })
+          .catch((error) => { console.log(error) });
       }
     }
     customElements.define(FilmSearch.is, FilmSearch);
