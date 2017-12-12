@@ -5,12 +5,30 @@
       :host {
         display: block;
       }
+      .films-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      .films-wrapper .film-item {
+        border: solid 1px lightgray;
+        padding: 1rem 2rem;
+      }
+      .films-wrapper .film-item + .film-item {
+        margin-top: 1rem;
+      }
+      .films-wrapper .film-item p {
+        margin: 0;
+      }
     </style>
 
-    <template is="dom-repeat" items="{{films}}">
-      <p>[[item.Title]]</p>
-      <p>[[item.Year]]</p>
-    </template>
+    <div class="films-wrapper">
+      <template is="dom-repeat" items="{{films}}">
+        <div class="film-item">
+          <p>[[item.Title]]</p>
+          <p>[[item.Year]]</p>
+        </div>
+      </template>
+    </div>
 
   </template>
 
