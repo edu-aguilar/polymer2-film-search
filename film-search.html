@@ -1,5 +1,6 @@
 <link rel="import" href="search-box.html">
 <link rel="import" href="film-list.html">
+<link rel="import" href="https://polygit.org/components/paper-spinner/paper-spinner.html">
 
 <dom-module id="film-search">
 
@@ -12,7 +13,9 @@
 
     <p>Buscador de películas</p>
     <search-box placeholder="Buscar película..."></search-box>
-
+    
+    <paper-spinner active$="{{searching}}"></paper-spinner>
+    
     <template is="dom-if" if="{{_areThereFilms(films)}}">
       <film-list films="{{films}}"></film-list>
     </template>
@@ -28,6 +31,10 @@
           films: {
             type: Array,
             value: function () { return []; }
+          },
+          searching: {
+            type: Boolean,
+            value: false
           }
         }
       }
@@ -43,11 +50,13 @@
       }
 
       _findFilms(film) {
-        const url = `http://www.omdbapi.com/?s=${film}&plot=full&apikey=e477ed6a`
+        const url = `http://www.omdbapi.com/?s=${film}&plot=full&apikey=e477ed6a`;
+        this.searching = true;
         fetch(url)
           .then((resp) => resp.json())
-          .then((data) => { this.set('films', data.Search) })
-          .catch((error) => { console.log(error) });
+          .then((data) => { this.set('films', data.Search); })
+          .catch((error) => { console.log(error) })
+          .finally(() => { this.searching = false; });
       }
 
       _areThereFilms(films) {
