@@ -8,13 +8,18 @@
     <style>
       :host {
         display: block;
+        padding: 0 1rem;
+      }
+      paper-spinner {
+        margin: 1rem auto;
+        display: block;
       }
     </style>
 
     <p>Buscador de películas</p>
     <search-box placeholder="Buscar película..."></search-box>
     
-    <paper-spinner active$="{{searching}}"></paper-spinner>
+    <paper-spinner active$="[[searching]]"></paper-spinner>
     
     <template is="dom-if" if="{{_areThereFilms(films)}}">
       <film-list films="{{films}}"></film-list>
