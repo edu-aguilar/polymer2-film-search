@@ -5,18 +5,23 @@
       :host {
         display: block;
       }
-      .films-wrapper {
-        display: flex;
-        flex-direction: column;
-      }
       .films-wrapper .film-item {
         border: solid 1px lightgray;
         padding: 1rem 2rem;
+        display: flex;
       }
       .films-wrapper .film-item + .film-item {
         margin-top: 1rem;
       }
-      .films-wrapper .film-item p {
+      .films-wrapper .film-item img {
+        height: 150px;
+      }
+      .films-wrapper .film-item .info-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+      .films-wrapper .film-item .info-wrapper p {
         margin: 0;
       }
     </style>
@@ -24,8 +29,11 @@
     <div class="films-wrapper">
       <template is="dom-repeat" items="{{films}}">
         <div class="film-item">
-          <p>[[item.Title]]</p>
-          <p>[[item.Year]]</p>
+          <img src="[[item.Poster]]" alt="">
+          <div class="info-wrapper">
+            <p>[[item.Title]]</p>
+            <p>[[item.Year]]</p>
+          </div>
         </div>
       </template>
     </div>
