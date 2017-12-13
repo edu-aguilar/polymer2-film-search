@@ -19,7 +19,7 @@
     <p>Buscador de películas</p>
     <search-box placeholder="Buscar película..."></search-box>
     
-    <paper-spinner active$="[[searching]]"></paper-spinner>
+    <paper-spinner id="spinner"></paper-spinner>
     
     <template is="dom-if" if="{{_areThereFilms(films)}}">
       <film-list films="{{films}}"></film-list>
@@ -56,12 +56,12 @@
 
       _findFilms(film) {
         const url = `http://www.omdbapi.com/?s=${film}&plot=full&apikey=e477ed6a`;
-        this.searching = true;
+        this.$.spinner.active = true;
         fetch(url)
           .then((resp) => resp.json())
           .then((data) => { this.set('films', data.Search); })
-          .catch((error) => { console.log(error) })
-          .finally(() => { this.searching = false; });
+          .catch((error) => { console.log(error); })
+          .finally(() => { this.$.spinner.active = false; });
       }
 
       _areThereFilms(films) {
